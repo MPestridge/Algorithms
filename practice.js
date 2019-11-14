@@ -128,7 +128,7 @@ function timeConversion(s) {
   }
   return s;
 }
-
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
 // HackerLand University has the following grading policy:
 
 // Every student receives a grade in the inclusive range from 0 to 100.
@@ -177,7 +177,8 @@ function gradingStudents(grades) {
   }
   return outpurArr;
 }
-
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+// Apples and Oranges
 // Sam's house has an apple tree and an orange tree that yield an abundance of fruit. In the diagram below, the red region denotes his house, where s is the start point, and t is the endpoint. The apple tree is to the left of his house, and the orange tree is to its right. You can assume the trees are located on a single point, where the apple tree is at point a, and the orange tree is at point b.
 
 // When a fruit falls from its tree, it lands d units of distance from its tree of origin along the x-axis. A negative value of d means the fruit fell d units to the tree's left, and a positive value of d means it falls d units to the tree's right.
@@ -240,3 +241,110 @@ function countApplesAndOranges(s, t, a, b, apples, oranges) {
   console.log(apples.filter(apple => apple + a >= s && apple + a <= t).length);
   console.log(oranges.filter(orange => orange + b >= s && orange + b <= t).length);
 };
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+// 2D Array - DS
+// Given a 6x6 2D Array, arr:
+
+// 1 1 1 0 0 0
+// 0 1 0 0 0 0
+// 1 1 1 0 0 0
+// 0 0 0 0 0 0
+// 0 0 0 0 0 0
+// 0 0 0 0 0 0
+
+// We define an hourglass in A to be a subset of values with indices falling in this pattern in arr's graphical representation:
+// a b c
+//   d
+// e f g
+
+// There are 16 hourglasses in arr, and an hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum for every hourglass in arr, then print the maximum hourglass sum.
+
+// For example, given the 2D array:
+// -9 -9 -9  1 1 1
+//  0 -9  0  4 3 2
+// -9 -9 -9  1 2 3
+//  0  0  8  6 6 0
+//  0  0  0 -2 0 0
+//  0  0  1  2 4 0
+
+// We calculate the following 16 hourglass values:
+// -63, -34, -9, 12,
+// -10, 0, 28, 23,
+// -27, -11, -2, 10,
+// 9, 17, 25, 18
+
+// Our highest hourglass value is 28 from the hourglass:
+// 0 4 3
+//   1
+// 8 6 6
+
+// Function Description:
+// Complete the function hourglassSum in the editor below. It should return an integer, the maximum hourglass sum in the array.
+
+// hourglassSum has the following parameter(s):
+// arr: an array of integers
+
+// Input Format:
+// Each of the 6 lines of inputs arr[i] contains 6 space-separated integers arr[i][j].
+
+// Constraints:
+// -9 <= arr[i][j] <= 9
+// 0 <= i,j <= 5
+
+// Output Format:
+// Print the largest (maximum) hourglass sum found in arr.
+
+// Sample Input:
+// 1 1 1 0 0 0
+// 0 1 0 0 0 0
+// 1 1 1 0 0 0
+// 0 0 2 4 4 0
+// 0 0 0 2 0 0
+// 0 0 1 2 4 0
+
+// Sample Output:
+// 19
+
+// Explanation:
+// arr contains the following hourglasses:
+// 1 1 1  1 1 0  1 0 0  0 0 0
+//   1      0      0      0
+// 1 1 1  1 1 0  1 0 0  0 0 0
+
+// 0 1 0  1 0 0  0 0 0  0 0 0
+//   1      1      0      0
+// 0 0 2  0 2 4  2 4 4  4 4 0
+
+// 1 1 1  1 1 0  1 0 0  0 0 0
+//   0      2      4      4
+// 0 0 0  0 0 2  0 2 0  2 0 0
+
+// 0 0 2  0 2 4  2 4 4  4 4 0
+//   0      0      2      0
+// 0 0 1  0 1 2  1 2 4  2 4 0
+
+// The hourglass with the maximum sum (19) is:
+// 2 4 4
+//   2
+// 1 2 4
+
+function hourglassSum(arr) {
+  let sumsArr = [];
+  let i = 0;
+  let j = 0;
+  let maxSum = 0;
+  while (sumsArr.length < 16) {
+    if (i < 4) {
+      sumsArr.push(arr[j][i] + arr[j][i + 1] + arr[j][i + 2] + arr[j + 1][i + 1] + arr[j + 2][i] + arr[j + 2][i + 1] + arr[j + 2][i + 2]);
+      i++;
+    } else {
+      i = 0;
+      j++;
+    };
+  }
+  maxSum = sumsArr.reduce(function(a, b) {
+    return Math.max(a, b);
+  });
+  return maxSum;
+}
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
